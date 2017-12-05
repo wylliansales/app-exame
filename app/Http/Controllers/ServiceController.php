@@ -10,10 +10,16 @@ use Illuminate\Http\Request;
 class ServiceController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $services = Service::paginate(8);
-        return view('service.index', compact('services'));
+        $menu = 'service';
+        return view('service.index', compact(['services','menu']));
     }
 
     /**
@@ -23,8 +29,8 @@ class ServiceController extends Controller
      */
     public function create()
     {
-
-        return view('service.create');
+        $menu = 'service';
+        return view('service.create', compact('menu'));
     }
 
     /**
@@ -53,7 +59,8 @@ class ServiceController extends Controller
             $services_has_exams->exam_id = $request->exam_id;
             $services_has_exams->save();
             $exams = 'active';
-            return view('service.create', compact(['service', 'exams']));
+            $menu = 'service';
+            return view('service.create', compact(['service', 'exams','menu']));
         }
 
         return redirect()->action('ServiceController@index');
@@ -68,7 +75,8 @@ class ServiceController extends Controller
     public function show($id)
     {
         $service = Service::find($id);
-        return view('service.details', compact('service'));
+        $menu = 'service';
+        return view('service.details', compact(['service','menu']));
     }
 
 
@@ -81,7 +89,8 @@ class ServiceController extends Controller
     public function edit($id)
     {
         $service = Service::find($id);
-        return view('service.create', compact('service'));
+        $menu = 'service';
+        return view('service.create', compact(['service','menu']));
     }
 
     /**
@@ -116,6 +125,7 @@ class ServiceController extends Controller
         $service = $exam->service;
         $exam->delete();
         $exams = 'active';
-        return view('service.create', compact(['service', 'exams']));
+        $menu = 'service';
+        return view('service.create', compact(['service', 'exams', 'menu']));
     }
 }

@@ -12,10 +12,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-
+    <link rel="stylesheet" href="{{ asset('font-awesome/css/font-awesome.min.css') }}">
     <style>
         body{
-            background: #59b664;
+            background: #343a40;
         }
 
     </style>

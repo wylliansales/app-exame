@@ -9,11 +9,16 @@ use Illuminate\Support\Facades\DB;
 
 class CompanyController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index()
     {
        $companies = Company::paginate(8);
-        return view('company.index', compact('companies'));
+       $menu = 'company';
+        return view('company.index', compact(['companies','menu']));
     }
 
     public function create()
@@ -31,7 +36,8 @@ class CompanyController extends Controller
     public function show(Request $request)
     {
         $searchs = DB::table('companies')->where('name','like',$request->name . "%")->get();
-        return view('company.index', compact('searchs'));
+        $menu = 'company';
+        return view('company.index', compact(['searchs','menu']));
     }
 
 

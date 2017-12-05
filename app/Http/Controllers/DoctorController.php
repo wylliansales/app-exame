@@ -8,15 +8,16 @@ use Illuminate\Support\Facades\DB;
 
 class DoctorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $doctors = Doctor::paginate(8);
-        return view('doctor.index', compact('doctors'));
-    }
-
-    public function create()
-    {
-        //
+        $menu = 'doctor';
+        return view('doctor.index', compact(['doctors','menu']));
     }
 
     public function store(Request $request)
@@ -29,7 +30,8 @@ class DoctorController extends Controller
     public function show(Request $request)
     {
         $searchs = DB::table('doctors')->where('name','like',$request->name . "%")->get();
-        return view('doctor.index', compact('searchs'));
+        $menu = 'doctor';
+        return view('doctor.index', compact(['searchs','menu']));
     }
 
 

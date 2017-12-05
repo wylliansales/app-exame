@@ -23,7 +23,11 @@
             /*background: url("{{ asset('/img/fundo.jpg') }}");*/
             background: #343a40;
         }
+        .menu-select{
+            background: rgba(0,0,0, 0.2);
+        }
     </style>
+
 
 </head>
 <body>
@@ -51,12 +55,12 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav ">
                     &nbsp;
-                    <li><a href="{{ action('HomeController@index') }}">Home</a></li>
-                    <li><a href="{{ action('ServiceController@index') }}">Serviços</a></li>
-                    <li><a href="{{ action('CompanyController@index') }}">Empresas</a></li>
-                    <li><a href="{{ action('EmployeeController@index') }}">Funcionários</a></li>
-                    <li><a href="{{ action('DoctorController@index') }}">Médicos</a></li>
-                    <li><a href="{{ action('ExamController@index') }}">Exames</a></li>
+                    <li class="{{($menu == 'home')?'menu-select':''}}"><a href="{{ action('HomeController@index') }}">Home</a></li>
+                    <li class="{{($menu == 'service')?'menu-select':''}}"><a href="{{ action('ServiceController@index') }}">Serviços</a></li>
+                    <li class="{{($menu == 'company')?'menu-select':''}}"><a href="{{ action('CompanyController@index') }}">Empresas</a></li>
+                    <li class="{{($menu == 'employee')?'menu-select':''}}"><a href="{{ action('EmployeeController@index') }}">Funcionários</a></li>
+                    <li class="{{($menu == 'doctor')?'menu-select':''}}"><a href="{{ action('DoctorController@index') }}">Médicos</a></li>
+                    <li class="{{($menu == 'exam')?'menu-select':''}}"><a href="{{ action('ExamController@index') }}">Exames</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -102,6 +106,71 @@
 <script src="{{ asset('js/jquery-ui.js') }}"></script>
 <script src="{{ asset('js/app-validacao.js') }}"></script>
 <script src="{{ asset('js/prog.js') }}"></script>
+
+<script>
+    $(function () {
+        var formService = $('#form-service');
+        $( "#employee-name-input" ).autocomplete({
+            source: '{{ action('EmployeeController@all') }}',
+            select: function (event, ui) {
+                var item = ui.item.value;
+                $.ajax({
+                    url: '{{action('EmployeeController@getEmployeeId')}}',
+                    data: 'name='+item,
+                    success: function (employee) {
+                        formService.find('input[name="employee_id"]').val(employee[0].id);
+                    }
+                })
+            }
+        });
+
+        $('#doctor-name-input').autocomplete({
+            source: '{{action('DoctorController@all')}}',
+            select: function (event, ui) {
+                var item = ui.item.value;
+                $.ajax({
+                    url: '{{action('DoctorController@getDoctorId')}}',
+                    data: 'name='+item,
+                    success: function (doctor) {
+                        formService.find('input[name="doctor_id"]').val(doctor[0].id);
+                    }
+                })
+            }
+        });
+
+        $('#exam-name-input').autocomplete({
+            source: '{{action('ExamController@all')}}',
+            select: function (event, ui) {
+                var item = ui.item.value;
+                $.ajax({
+                    url: '{{action('ExamController@getExamId')}}',
+                    data: 'name='+item,
+                    success: function (exam) {
+                        $('#exam_id').val(exam[0].id);
+                    }
+                })
+            }
+        });
+
+        $('#company-name-input').autocomplete({
+            source: '{{action('CompanyController@all')}}',
+            select: function (event, ui) {
+                var item = ui.item.value;
+                $.ajax({
+                    url: '{{action('CompanyController@getCompanyId')}}',
+                    data: 'name='+item,
+                    success: function (company) {
+                        formService.find('input[name="company_id"]').val(company[0].id);
+                    }
+                })
+            }
+        });
+
+        $('.button-store-service').click(function () {
+            formService.submit();
+        })
+    })
+</script>
 
 </body>
 </html>

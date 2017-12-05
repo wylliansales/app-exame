@@ -8,20 +8,21 @@ use Illuminate\Support\Facades\DB;
 
 class ExamController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $exams = Exam::paginate(8);
-        return view('exam.index', compact('exams'));
+        $menu = 'exam';
+        return view('exam.index', compact(['exams','menu']));
     }
 
-    public function create()
-    {
-
-    }
 
     public function store(Request $request)
     {
-
         Exam::create($request->all());
         return redirect()->action('ExamController@index');
     }
@@ -29,7 +30,8 @@ class ExamController extends Controller
     public function show(Request $request)
     {
         $searchs = DB::table('exams')->where('name','like',$request->name . "%")->get();
-        return view('exam.index', compact('searchs'));
+        $menu = 'exam';
+        return view('exam.index', compact(['searchs','menu']));
     }
 
 

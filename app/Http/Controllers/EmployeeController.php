@@ -9,15 +9,16 @@ use Illuminate\Support\Facades\DB;
 class EmployeeController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $employees = Employee::paginate(8);
-        return view('employee.index', compact('employees'));
-    }
-
-    public function create()
-    {
-        //
+        $menu = 'employee';
+        return view('employee.index', compact(['employees','menu']));
     }
 
     public function store(Request $request)
@@ -30,7 +31,8 @@ class EmployeeController extends Controller
     public function show(Request $request)
     {
         $searchs = DB::table('employees')->where('name','like',$request->name . "%")->get();
-        return view('employee.index', compact('searchs'));
+        $menu = 'employee';
+        return view('employee.index', compact(['searchs','menu']));
     }
 
 
