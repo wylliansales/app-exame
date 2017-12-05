@@ -6,6 +6,7 @@ use App\Http\Requests\ServiceRequest;
 use App\Models\Service;
 use App\Models\Services_has_Exams;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ServiceController extends Controller
 {
@@ -113,6 +114,7 @@ class ServiceController extends Controller
      */
     public function destroy($id)
     {
+        DB::table('services_has_exams')->where('service_id', '=', $id)->delete();
         $service = Service::find($id);
         $service->delete();
 
