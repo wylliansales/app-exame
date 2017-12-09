@@ -101,9 +101,9 @@
 </div>
 
 <!-- Scripts -->
-{{--<script src="{{ asset('js/jquery.min.js') }}"></script>--}}
+
 <script src="{{ asset('js/app.js') }}"></script>
-<script src="{{ asset('js/jquery-ui.js') }}"></script>
+<script src="{{ asset('js/jquery-ui.min.js') }}"></script>
 <script src="{{ asset('js/app-validacao.js') }}"></script>
 <script src="{{ asset('js/prog.js') }}"></script>
 

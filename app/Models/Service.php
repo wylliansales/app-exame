@@ -8,7 +8,7 @@ class Service extends Model
 {
 
     protected $fillable = [
-        'doctor_id', 'employee_id', 'company_id', 'observation', 'exam_date',
+        'doctor_id', 'employee_id', 'company_id', 'observation', 'exam_date', 'start_time',
     ];
 
     public function doctor()
@@ -28,7 +28,7 @@ class Service extends Model
 
     public function services_has_exams()
     {
-        return $this->hasMany('App\Models\services_has_exams');
+        return $this->hasMany('App\Models\Services_has_Exams');
     }
 
 }

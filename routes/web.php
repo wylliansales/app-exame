@@ -46,8 +46,16 @@ Route::get('/doctor/edit/{id}', 'DoctorController@edit');
 Route::get('/doctor/destroy/{id}', 'DoctorController@destroy');
 
 Route::get('/service', 'ServiceController@index');
+Route::get('/service/recent', 'ServiceController@getRecent');
+Route::get('/service/scheduled', 'ServiceController@getScheduled');
+Route::get('/service/not/finished', 'ServiceController@getNotFinished');
+Route::get('/service/finished', 'ServiceController@getFinished');
+Route::get('/service/cancel', 'ServiceController@getCancel');
+Route::get('/service/cancel/{id}', 'ServiceController@cancel');
 Route::get('/service/create', 'ServiceController@create');
 Route::get('/service/show/details/{id}', 'ServiceController@show');
+Route::get('/service/show/seach', 'ServiceController@seach');
+Route::post('/service/finished', 'ServiceController@finished');
 Route::post('/service/store', 'ServiceController@store');
 Route::get('/service/destroy/{id}', 'ServiceController@destroy');
 Route::get('/service/destroy/exam/{id}', 'ServiceController@destroyExam');

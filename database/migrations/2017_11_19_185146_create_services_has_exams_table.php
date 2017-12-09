@@ -19,6 +19,7 @@ class CreateServicesHasExamsTable extends Migration
             $table->foreign('service_id')->references('id')->on('services');
             $table->integer('exam_id')->unsigned();
             $table->foreign('exam_id')->references('id')->on('exams');
+            $table->decimal('price');
             $table->timestamps();
         });
     }

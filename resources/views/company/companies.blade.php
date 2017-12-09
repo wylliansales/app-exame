@@ -1,5 +1,5 @@
 @if(!empty($companies))
-<table class="table table-hover" style="font-size: 12px">
+<table class="table table-condensed table-hover" style="font-size: 12px">
     <thead>
     <tr>
         <th>ID</th>

@@ -28,7 +28,7 @@
                                             <li><a href="{{action('ServiceController@edit',['id'=> $service->id])}}"><i class="fa fa-pencil fa-fw"></i>&nbsp;Editar</a></li>
                                         </ul>
                                     </div>
-                                    <a href="" class="btn btn-success">Finalizar</a>
+                                    <a href="{{action('ServiceController@cancel', ['id'=>$service->id])}}" class="btn btn-success" data-toggle="modal" data-target="#modal-finished">Finalizar</a>
                                     <a href="" class="btn btn-default"><i class="fa fa-ban fa-fw"></i>Cancelar</a>
                                 </div>
                             </div>
@@ -51,18 +51,18 @@
                                        </thead>
 
                                        <tbody>
-                                           <?php $total=0; ?>
+                                           <?php $total = 0; ?>
                                            @foreach($service->services_has_exams as $exam)
                                                 <tr>
                                                     <td>{{$exam->exam->name}}</td>
-                                                    <td>R$ {{$exam->exam->price}}</td>
+                                                    <td>R$ {{$exam->price}}</td>
                                                 </tr>
-                                               <?php $total +=  $exam->exam->price;?>
+                                               <?php $total +=  $exam->price;?>
                                            @endforeach
                                        </tbody>
                                        <tfoot>
                                            <th><span class="pull-right">Total</span></th>
-                                           <th>R$ {{$total}}</th>
+                                           <th>R$ {{number_format($total,2) }}</th>
                                        </tfoot>
                                    </table>
                                     @else
@@ -77,4 +77,29 @@
         </div>
     </div>
 </div>
+<div class="modal fade" tabindex="-1" role="dialog" id="modal-finished">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Observações do Serviço</h4>
+            </div>
+            <form action="{{action('ServiceController@finished')}}" method="post">
+                {{ csrf_field() }}
+                <input type="hidden" name="id" value="{{$service->id}}">
+            <div class="modal-body">
+                <p>Campo não obrigatório&hellip;</p>
+                <div class="form-group">
+
+                    <textarea class="form-control" id="" cols="10" rows="5" name="observation"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 @endsection

@@ -67,6 +67,15 @@
                                                     <input type="date" class="form-control" id="exam_date" placeholder="Data" name="exam_date" value="{{isset($service)? $service->exam_date: ''}}" required>
                                                 </div>
                                             </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label" for="start_time">Hora</label>
+                                                    <div class="col-md-3">
+                                                        <input type="time" class="form-control form-control-sm"
+                                                               id="start_time" name="start_time" required=""
+                                                               value="{{isset($service)? $service->start_time: ''}}">
+                                                    </div>
+                                                </div>
+
                                                 <input type="hidden" id="exam_id" name="exam_id">
                                             {{--<button type="button" class="btn btn-primary pull-right button-store-service">Salvar</button>--}}
                                             </div>
@@ -105,7 +114,7 @@
                                                     <tr>
                                                         <input type="hidden" name="exam_id{{$cont}}" value="{{$exam->id}}">
                                                         <td>{{$exam->exam->name}}</td>
-                                                        <td>{{$exam->exam->price}}</td>
+                                                        <td>R$ {{$exam->price}}</td>
                                                         <td>
                                                             <a href="{{action('ServiceController@destroyExam', ['id' => $exam->id])}}"><i class="fa fa-times" aria-hidden="true"></i></a>
                                                         </td>
@@ -119,7 +128,7 @@
                                                 </tbody>
                                             </table>
 
-                                        <p class="text-right">Total: {{$valorTotal}}</p>
+                                        <p class="text-right">Total: R$ {{$valorTotal}}</p>
                                     </div>
                                     <button type="button" class="btn btn-primary pull-right button-store-service" style="margin-top: 10px">Concluir</button>
                                 </div>

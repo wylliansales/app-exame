@@ -20,19 +20,19 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-12">
+                                    <form action="{{action('ServiceController@seach')}}" method="get">
                                     <div class="form-inline">
-                                        <input type="date" class="form-control">
+                                        <input type="date" class="form-control" name="start_date">
                                         à
-                                        <input type="date" class="form-control">
+                                        <input type="date" class="form-control" name="stop_date">                                        &nbsp;
                                         &nbsp;
+                                        <input type="text" class="form-control" name="company" placeholder="Empresa">                                        &nbsp;
                                         &nbsp;
-                                        <input type="text" class="form-control" placeholder="Empresa">
+                                        <input type="text" class="form-control" name="employee" placeholder="Funcionário">
                                         &nbsp;
-                                        &nbsp;
-                                        <input type="text" class="form-control" placeholder="Funcionário">
-                                        &nbsp;
-                                        <button class="btn btn-success">Buscar</button>
+                                        <button type="submit" class="btn btn-success">Buscar</button>
                                     </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

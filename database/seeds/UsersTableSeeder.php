@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
         factory(App\Models\User::class)->create([
             'name'      => 'Admin',
             'email'     => 'admin@admin.com',
-            'password'  => bcrypt('123'),
+            'password'  => bcrypt('123@123'),
             'remember_token'    => str_random(10)
         ]);
     }
