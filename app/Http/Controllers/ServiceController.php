@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ServiceRequest;
+use App\Models\Company;
 use App\Models\Exam;
 use App\Models\Service;
 use App\Models\Services_has_Exams;
@@ -76,8 +77,46 @@ class ServiceController extends Controller
 
     public function seach(Request $request)
     {
-        if(!empty($request->start_date) && !empty($request->stop_date))
-        $services = Service::where('exam_date','>=',$request->start_date)->where('exam_date','<=',$request->stop_date)->paginate(15);
+        if (!empty($request->start_date)&& !empty($request->stop_date) && !empty($request->company) && !empty($request->employee)){
+            $companies = DB::table('companies')->select('id')->where('name','like','%'.$request->company.'%');
+            $employees = DB::table('employees')->select('id')->where('name','like','%'.$request->employee.'%');
+
+            $services = Service::where('exam_date','>=',$request->start_date)
+                ->where('exam_date','<=',$request->stop_date)
+                ->whereIn('company_id',$companies)
+                ->whereIn('employee_id',$employees)
+                ->paginate(100);
+        } elseif (!empty($request->start_date)&& !empty($request->stop_date) && !empty($request->company)){
+            $companies = DB::table('companies')->select('id')->where('name','like','%'.$request->company.'%');
+
+            $services = Service::where('exam_date','>=',$request->start_date)
+                ->where('exam_date','<=',$request->stop_date)
+                ->whereIn('company_id',$companies)
+                ->paginate(100);
+        } elseif (!empty($request->start_date)&& !empty($request->stop_date)&& !empty($request->employee)){
+
+            $employees = DB::table('employees')->select('id')->where('name','like','%'.$request->employee.'%');
+
+            $services = Service::where('exam_date','>=',$request->start_date)
+                ->where('exam_date','<=',$request->stop_date)
+                ->whereIn('employee_id',$employees)
+                ->paginate(100);
+        } elseif (!empty($request->start_date)&& !empty($request->stop_date)) {
+            $services = Service::where('exam_date','>=',$request->start_date)
+                ->where('exam_date','<=',$request->stop_date)
+                ->paginate(100);
+        } elseif (!empty($request->employee)){
+            $employees = DB::table('employees')->select('id')->where('name','like','%'.$request->employee.'%');
+
+            $services = Service::whereIn('employee_id',$employees)
+                ->paginate(100);
+        } elseif (!empty($request->company)){
+            $companies = DB::table('companies')->select('id')->where('name','like','%'.$request->company.'%');
+
+            $services = Service::whereIn('company_id',$companies)
+                ->paginate(100);
+        }
+
 
         $data = $this->getData('all');
         $menu = 'service';

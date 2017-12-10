@@ -26,9 +26,9 @@
                                         à
                                         <input type="date" class="form-control" name="stop_date">                                        &nbsp;
                                         &nbsp;
-                                        <input type="text" class="form-control" name="company" placeholder="Empresa">                                        &nbsp;
+                                        <input type="text" id="company-name-search" class="form-control" name="company" placeholder="Empresa">                                        &nbsp;
                                         &nbsp;
-                                        <input type="text" class="form-control" name="employee" placeholder="Funcionário">
+                                        <input type="text" id="employee-name-search" class="form-control" name="employee" placeholder="Funcionário">
                                         &nbsp;
                                         <button type="submit" class="btn btn-success">Buscar</button>
                                     </div>

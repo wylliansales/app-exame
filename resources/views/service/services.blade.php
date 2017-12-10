@@ -1,4 +1,5 @@
 <div class="panel-body"> <!-- Table -->
+ <div id="service-print">   
     <table id="table-service-recentes" class="table table-hover">
         <thead>
         <tr>
@@ -38,6 +39,7 @@
         @endforeach
         </tbody>
     </table>
+    </div>
     @if($data['subMenu'] == 'all' || $data['subMenu'] == 'finished' || $data['subMenu'] == 'cancel')
     {!!$services->render()!!}
     @endif

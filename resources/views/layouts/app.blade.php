@@ -18,7 +18,31 @@
     <link rel="stylesheet" href="{{ asset('font-awesome/css/font-awesome.min.css') }}">
 
 
-    <style>
+    <style type="text/css">
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #service-print, #printable * {
+                visibility: visible;
+            }
+            #service-print {
+                position: fixed;
+                left: 0;
+                top: 0;
+            }
+            body {
+                visibility:hidden;
+            }
+
+            #service-print {
+                visibility:visible;
+                position: absolute;
+                top:0;
+                left:0;
+            }
+        }
         body{
             /*background: url("{{ asset('/img/fundo.jpg') }}");*/
             background: #343a40;

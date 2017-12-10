@@ -132,4 +132,14 @@ $(function () {
         return false;
     })
 
+
+    $('.imprimir-service').click(function () {
+       // var content = document.getElementById('service-print').innerHTML;
+      //  var tela_impressao = window.open('about:blank');
+
+        //tela_impressao.document.write(content);
+        window.print();
+        window.close();
+    })
+
 })

@@ -24,7 +24,7 @@
                                         </button>
                                         <ul class="dropdown-menu">
                                             <li><a href="{{action('ServiceController@destroy',['id' => $service->id])}}"><i class="fa fa-trash-o fa-fw"></i>&nbsp;Excluir</a></li>
-                                            <li><a href="#"><i class="fa fa-print fa-fw"></i>&nbsp;Imprimir</a></li>
+                                            <li><a href="#" class="imprimir-service"><i class="fa fa-print fa-fw"></i>&nbsp;Imprimir</a></li>
                                             <li><a href="{{action('ServiceController@edit',['id'=> $service->id])}}"><i class="fa fa-pencil fa-fw"></i>&nbsp;Editar</a></li>
                                         </ul>
                                     </div>
@@ -33,41 +33,44 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <div class="panel panel-default" style="margin-top: 10px" >
-                                <div class="panel-body">
-                                    <p><strong>Nome:</strong> {{$service->employee->name}}</p>
-                                    <p><strong>Empresa:</strong> {{$service->company->name}}</p>
-                                    <p><strong>Médico:</strong> {{$service->doctor->name}}</p>
-                                </div>
-                                <div class="panel-footer">
-                                    @if(!empty($service->services_has_exams) && count($service->services_has_exams) > 0)
-                                   <table class="table table-bordered">
-                                       <thead>
-                                        <tr>
-                                            <th>Nome</th>
-                                            <th>Valor</th>
-                                        </tr>
-                                       </thead>
 
-                                       <tbody>
-                                           <?php $total = 0; ?>
-                                           @foreach($service->services_has_exams as $exam)
-                                                <tr>
-                                                    <td>{{$exam->exam->name}}</td>
-                                                    <td>R$ {{$exam->price}}</td>
-                                                </tr>
-                                               <?php $total +=  $exam->price;?>
-                                           @endforeach
-                                       </tbody>
-                                       <tfoot>
-                                           <th><span class="pull-right">Total</span></th>
-                                           <th>R$ {{number_format($total,2) }}</th>
-                                       </tfoot>
-                                   </table>
-                                    @else
-                                        <p class="text-center">Não há exame vinculado</p>
-                                    @endif
+                            <div class="col-md-12">
+                                <div id="service-print">
+                                <div class="panel panel-default" style="margin-top: 10px" >
+                                    <div class="panel-body">
+                                        <p><strong>Nome:</strong> {{$service->employee->name}}</p>
+                                        <p><strong>Empresa:</strong> {{$service->company->name}}</p>
+                                        <p><strong>Médico:</strong> {{$service->doctor->name}}</p>
+                                    </div>
+                                    <div class="panel-footer">
+                                        @if(!empty($service->services_has_exams) && count($service->services_has_exams) > 0)
+                                       <table class="table table-bordered">
+                                           <thead>
+                                            <tr>
+                                                <th>Nome</th>
+                                                <th>Valor</th>
+                                            </tr>
+                                           </thead>
+
+                                           <tbody>
+                                               <?php $total = 0; ?>
+                                               @foreach($service->services_has_exams as $exam)
+                                                    <tr>
+                                                        <td>{{$exam->exam->name}}</td>
+                                                        <td>R$ {{$exam->price}}</td>
+                                                    </tr>
+                                                   <?php $total +=  $exam->price;?>
+                                               @endforeach
+                                           </tbody>
+                                           <tfoot>
+                                               <th><span class="pull-right">Total</span></th>
+                                               <th>R$ {{number_format($total,2) }}</th>
+                                           </tfoot>
+                                       </table>
+                                        @else
+                                            <p class="text-center">Não há exame vinculado</p>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
