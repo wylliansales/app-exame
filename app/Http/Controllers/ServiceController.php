@@ -234,5 +234,9 @@ class ServiceController extends Controller
         ];
     }
 
-
+    public function deletes()
+    {
+        $services = DB::select('CALL `services_delete`');
+        return view('service.services_delete', compact('services'));
+    }
 }

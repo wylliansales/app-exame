@@ -27,7 +27,7 @@
             #service-print, #printable * {
                 visibility: visible;
             }
-            #service-print {
+            #printable {
                 position: fixed;
                 left: 0;
                 top: 0;
@@ -70,7 +70,7 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/home') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
             </div>
@@ -78,13 +78,14 @@
             <div class="collapse navbar-collapse navbar-right" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav ">
-                    &nbsp;
+                    &nbsp;@if(isset($menu))
                     <li class="{{($menu == 'home')?'menu-select':''}}"><a href="{{ action('HomeController@index') }}">Home</a></li>
                     <li class="{{($menu == 'service')?'menu-select':''}}"><a href="{{ action('ServiceController@index') }}">Serviços</a></li>
                     <li class="{{($menu == 'company')?'menu-select':''}}"><a href="{{ action('CompanyController@index') }}">Empresas</a></li>
                     <li class="{{($menu == 'employee')?'menu-select':''}}"><a href="{{ action('EmployeeController@index') }}">Funcionários</a></li>
                     <li class="{{($menu == 'doctor')?'menu-select':''}}"><a href="{{ action('DoctorController@index') }}">Médicos</a></li>
                     <li class="{{($menu == 'exam')?'menu-select':''}}"><a href="{{ action('ExamController@index') }}">Exames</a></li>
+                    @endif
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -113,6 +114,8 @@
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
+                                    <li><a href="{{ url('/auth/register') }}">Novo login</a></li>
+                                    <li><a href="{{ action('ServiceController@deletes') }}">Deletados</a></li>
                                 </ul>
                             </li>
                         @endguest

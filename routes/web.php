@@ -15,7 +15,13 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+Route::get('/auth/register', function (){
+    return view('auth.register');
+});
+
 Auth::routes();
+
+Route::post('/create', 'UserController@register');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/company', 'CompanyController@index');
@@ -60,6 +66,8 @@ Route::post('/service/store', 'ServiceController@store');
 Route::get('/service/destroy/{id}', 'ServiceController@destroy');
 Route::get('/service/destroy/exam/{id}', 'ServiceController@destroyExam');
 Route::get('/service/edit/{id}', 'ServiceController@edit');
+Route::get('/service/deletes', 'ServiceController@deletes');
+
 
 Route::get('/exam', 'ExamController@index');
 Route::get('/exam/show', 'ExamController@show');
