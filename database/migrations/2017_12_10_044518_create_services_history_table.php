@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCompaniesTable extends Migration
+class CreateServicesHistoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateCompaniesTable extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('services_history', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('cnpj',18);
-            $table->string('address')->nullable();
-            $table->string('phone',15)->nullable();
+            $table->integer('doctor_id');
+            $table->integer('company_id');
+            $table->integer('employee_id');
+            $table->mediumText('description')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateCompaniesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('services_history');
     }
 }

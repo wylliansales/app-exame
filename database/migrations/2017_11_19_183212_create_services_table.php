@@ -21,7 +21,7 @@ class CreateServicesTable extends Migration
             $table->foreign('employee_id')->references('id')->on('employees');
             $table->integer('company_id')->unsigned();
             $table->foreign('company_id')->references('id')->on('companies');
-            $table->string('observation')->nullable();
+            $table->mediumText('observation')->nullable();
             $table->date('exam_date');
             $table->time('start_time')->nullable();
            // $table->time('stop_time')->nullable();

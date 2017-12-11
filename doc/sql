@@ -1,51 +1,59 @@
-delimiter //
-create trigger trg_history_delete before delete
-  on services
-for each row
-  begin
-    INSERT INTO services_history (`doctor_id`, `company_id`, `employee_id`, `description`, `created_at`)
-    VALUES (old.doctor_id, old.company_id, old.employee_id, old.observation, now());
-  end //
+DELIMITER $$
 
-delimiter //
- CREATE trigger trg_validar_user before INSERT
- ON users
- for each row
- BEGIN
-	 SET @name = New.name;
-	 IF (char_length(@name) < 3) THEN
-	 SET new.name = null;
-  END if;
- END//
+CREATE
+  /*[DEFINER = { user | CURRENT_USER }]*/
+TRIGGER `app-exame`.`trg_history_delete` BEFORE DELETE
+  ON `app-exame`.`services`
+FOR EACH ROW BEGIN
+  INSERT INTO services_history (`doctor_id`, `company_id`, `employee_id`, `description`, `created_at`)
+  VALUES (old.doctor_id, old.company_id, old.employee_id, old.observation, NOW());
+END$$
 
-delimiter //
-CREATE trigger trg_validar_user_update before UPDATE
-  ON users
-for each row
-  BEGIN
-    SET @name = new.name;
-    IF (char_length(@name) < 3) THEN
-      SET new.name = null;
-    END if;
-  END//
+DELIMITER ;
 
 
 DELIMITER $$
 
 CREATE
   /*[DEFINER = { user | CURRENT_USER }]*/
+TRIGGER `app-exame`.`trg_validar_user_insert` BEFORE INSERT
+  ON `app-exame`.`users`
+FOR EACH ROW BEGIN
+  SET @name = new.name;
+  IF (CHAR_LENGTH(@name) < 3) THEN
+    SET new.name = NULL;
+  END IF;
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE
+  /*[DEFINER = { user | CURRENT_USER }]*/
+TRIGGER `app-exame`.`trg_validar_user_update` BEFORE UPDATE
+  ON `app-exame`.`users`
+FOR EACH ROW BEGIN
+  SET @name = new.name;
+  IF (CHAR_LENGTH(@name) < 3) THEN
+    SET new.name = NULL;
+  END IF;
+END$$
+
+DELIMITER ;
+
+
+DELIMITER $$
+
+CREATE
 PROCEDURE `app-exame`.`services_delete`()
-  /*LANGUAGE SQL
-  | [NOT] DETERMINISTIC
-  | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
-  | SQL SECURITY { DEFINER | INVOKER }
-  | COMMENT 'string'*/
   BEGIN
     SELECT employees.`name` AS employee, companies.`name` AS company, doctors.`name` doctor, services_history.`description`, services_history.`created_at`
     FROM services_history
       INNER JOIN companies ON companies.`id`=`services_history`.`company_id`
       INNER JOIN employees ON employees.`id`=`services_history`.`employee_id`
-      INNER JOIN doctors ON `doctors`.`id`=services_history.`doctor_id`;
+      INNER JOIN doctors ON `doctors`.`id`=services_history.`doctor_id`
+      ORDER BY created_at DESC;
   END$$
 
 DELIMITER ;

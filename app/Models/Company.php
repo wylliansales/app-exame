@@ -14,10 +14,4 @@ class Company extends Model
     {
         return $this->hasMany('App\Models\Service');
     }
-
-    public function schedules()
-    {
-        return $this->hasMany('App\Models\Schedule');
-    }
-
 }
