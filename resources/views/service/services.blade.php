@@ -10,7 +10,6 @@
             <th>Data/Hora</th>
             <th>Exames</th>
             <th>Total</th>
-            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -36,15 +35,26 @@
                     <?php $totalGeral += $total; ?>
                 </td>
                 <td>R$ {{number_format($total,2)}}</td>
-                <td></td>
             </tr>
         @endforeach
         </tbody>
+        <tfoot>
+        <th></th>
+        <th><strong>Total de registros: {{count($services)}}</strong></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th><strong class="pull-right">Total geral:</strong> </th>
+        <th><strong>R$ {{number_format($totalGeral,2)}}</strong></th>
+        </tfoot>
     </table>
     </div>
+
+
+
+
     @if($data['subMenu'] == 'all' || $data['subMenu'] == 'finished' || $data['subMenu'] == 'cancel')
     {!!$services->render()!!}
     @endif
-    <p><strong>Total de registros: {{count($services)}}</strong></p>
-    <p><strong>Total geral: R$ {{number_format($totalGeral,2)}}</strong></p>
+
 </div>

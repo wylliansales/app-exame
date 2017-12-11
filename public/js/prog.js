@@ -131,5 +131,11 @@ $(function () {
         })
         return false;
     })
+    $('.imprimir-service').click(function () {
+        window.print();
+        window.close();
+    })
+
+
 
 })

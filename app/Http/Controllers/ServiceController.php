@@ -172,7 +172,7 @@ class ServiceController extends Controller
 
     public function getRecent()
     {
-        $services = Service::where('exam_date', '=', date('Y-m-d'))->where('status','=','0');
+        $services = Service::where('exam_date', '=', date('Y-m-d'))->where('status','=','0')->get();
 
         $data = $this->getData('recent');
         $menu = 'service';
