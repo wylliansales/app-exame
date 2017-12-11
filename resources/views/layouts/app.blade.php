@@ -21,26 +21,111 @@
     <style type="text/css">
 
         @media print {
-            body * {
-                visibility: hidden;
-            }
-            #service-print, #printable * {
-                visibility: visible;
-            }
-            #printable {
-                position: fixed;
-                left: 0;
-                top: 0;
-            }
-            body {
-                visibility:hidden;
+
+            * {
+                background: transparent !important;
+                color: #000 !important;
+                text-shadow: none !important;
+                filter: none !important;
+                -ms-filter: none !important;
             }
 
-            #service-print {
-                visibility:visible;
-                position: absolute;
-                top:0;
-                left:0;
+            body {
+                margin: 0;
+                padding: 0;
+                line-height: 1.4em;
+                font: 12pt Georgia, "Times New Roman", Times, serif;
+                color: #000;
+            }
+
+            @page {
+                margin: 1.5cm;
+            }
+
+            .wrap {
+                width: 100%;
+                margin: 0;
+                float: none !important;
+            }
+
+            .no-print, nav, footer, video, audio, object, embed, a, button {
+                display: none;
+            }
+
+            .print {
+                display: block;
+            }
+
+            img {
+                max-width: 100%;
+            }
+
+            aside {
+                display: block;
+                page-break-before: always;
+            }
+
+            h1 {
+                font-size: 24pt;
+            }
+
+            h2 {
+                font-size: 18pt;
+            }
+
+            h3 {
+                font-size: 14pt;
+            }
+
+            p {
+                font-size: 12pt;
+                widows: 3;
+                orphans: 3;
+            }
+
+            a, a:visited {
+                text-decoration: underline;
+            }
+
+            a:link:after, a:visited:after {
+                content: " (" attr(href) ") ";
+            }
+
+            p a {
+                word-wrap: break-word;
+            }
+
+            q:after {
+                content: " (" attr(cite) ")"
+            }
+
+            a:after, a[href^="javascript:"]:after, a[href^="#"]:after {
+                content: "";
+            }
+
+            .page-break {
+                page-break-before: always;
+            }
+
+            /*Estilos da Demo*/
+            .header.print h1 {
+                width: 100%;
+                margin-bottom: 0.5cm;
+                font-size: 18pt;
+            }
+
+            .header.print:after {
+                content: "Este artigo foi escrito pela designer Dani Guerrato e retirado do site Tableless.";
+            }
+
+            .artigo {
+                margin-top: 0;
+                border-top: 1px solid #000;
+                padding-top: 1cm;
+            }
+
+            h1 a:link:after, h1 a:visited:after {
+                content: "";
             }
         }
         body{

@@ -85,14 +85,14 @@ class ServiceController extends Controller
                 ->where('exam_date','<=',$request->stop_date)
                 ->whereIn('company_id',$companies)
                 ->whereIn('employee_id',$employees)
-                ->paginate(100);
+                ->paginate(115);
         } elseif (!empty($request->start_date)&& !empty($request->stop_date) && !empty($request->company)){
             $companies = DB::table('companies')->select('id')->where('name','like','%'.$request->company.'%');
 
             $services = Service::where('exam_date','>=',$request->start_date)
                 ->where('exam_date','<=',$request->stop_date)
                 ->whereIn('company_id',$companies)
-                ->paginate(100);
+                ->paginate(115);
         } elseif (!empty($request->start_date)&& !empty($request->stop_date)&& !empty($request->employee)){
 
             $employees = DB::table('employees')->select('id')->where('name','like','%'.$request->employee.'%');
@@ -100,21 +100,21 @@ class ServiceController extends Controller
             $services = Service::where('exam_date','>=',$request->start_date)
                 ->where('exam_date','<=',$request->stop_date)
                 ->whereIn('employee_id',$employees)
-                ->paginate(100);
+                ->paginate(115);
         } elseif (!empty($request->start_date)&& !empty($request->stop_date)) {
             $services = Service::where('exam_date','>=',$request->start_date)
                 ->where('exam_date','<=',$request->stop_date)
-                ->paginate(100);
+                ->paginate(115);
         } elseif (!empty($request->employee)){
             $employees = DB::table('employees')->select('id')->where('name','like','%'.$request->employee.'%');
 
             $services = Service::whereIn('employee_id',$employees)
-                ->paginate(100);
+                ->paginate(115);
         } elseif (!empty($request->company)){
             $companies = DB::table('companies')->select('id')->where('name','like','%'.$request->company.'%');
 
             $services = Service::whereIn('company_id',$companies)
-                ->paginate(100);
+                ->paginate(115);
         }
 
 

@@ -6,7 +6,7 @@
         <div style="margin-top: 25px">
             @include('service.menu')
         <div class="col-md-10">
-            <div class="panel panel-default">
+            <div class="panel panel-default no-print">
                 <div class="panel-heading" role="tab" id="headingOne">
                     <h4 class="panel-title">
                         <i class="fa fa-search" aria-hidden="true"></i>

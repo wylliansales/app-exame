@@ -14,8 +14,9 @@
         </tr>
         </thead>
         <tbody>
+        <?php $totalGeral = 0; ?>
         @foreach($services as $service)
-            <?php $total = 0 ?>
+            <?php $total = 0; ?>
             <tr onclick="location.href = '{{action('ServiceController@show', ['id'=> $service->id])}}';" style="cursor: hand;">
                 <td class="row">{{$service->id}}</td>
                 <td>
@@ -32,6 +33,7 @@
                         {{$exam->exam->name}} &nbsp; R$ {{$exam->price}} <br>
                        <?php $total +=  $exam->price; ?>
                     @endforeach
+                    <?php $totalGeral += $total; ?>
                 </td>
                 <td>R$ {{number_format($total,2)}}</td>
                 <td></td>
@@ -43,4 +45,6 @@
     @if($data['subMenu'] == 'all' || $data['subMenu'] == 'finished' || $data['subMenu'] == 'cancel')
     {!!$services->render()!!}
     @endif
+    <p><strong>Total de registros: {{count($services)}}</strong></p>
+    <p><strong>Total geral: R$ {{number_format($totalGeral,2)}}</strong></p>
 </div>

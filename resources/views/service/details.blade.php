@@ -16,26 +16,34 @@
                                 <h4>Detalhes do Exame: {{$service->id}}</h4>
 
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-inline pull-right">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Mais <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="{{action('ServiceController@destroy',['id' => $service->id])}}"><i class="fa fa-trash-o fa-fw"></i>&nbsp;Excluir</a></li>
-                                            <li><a href="#" class="imprimir-service"><i class="fa fa-print fa-fw"></i>&nbsp;Imprimir</a></li>
-                                            <li><a href="{{action('ServiceController@edit',['id'=> $service->id])}}"><i class="fa fa-pencil fa-fw"></i>&nbsp;Editar</a></li>
-                                        </ul>
+                            <div class="no-print">
+                                <div class="col-md-6">
+                                    <div class="form-inline pull-right">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-default dropdown-toggle"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Mais <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a href="{{action('ServiceController@destroy',['id' => $service->id])}}"><i
+                                                                class="fa fa-trash-o fa-fw"></i>&nbsp;Excluir</a></li>
+                                                <li><a href="#" id="imprimir-service" class="imprimir-service"><i
+                                                                class="fa fa-print fa-fw"></i>&nbsp;Imprimir</a></li>
+                                                <li>
+                                                    <a href="{{action('ServiceController@edit',['id'=> $service->id])}}"><i
+                                                                class="fa fa-pencil fa-fw"></i>&nbsp;Editar</a></li>
+                                            </ul>
+                                        </div>
+                                        <a href="{{action('ServiceController@cancel', ['id'=>$service->id])}}"
+                                           class="btn btn-success" data-toggle="modal" data-target="#modal-finished">Finalizar</a>
+                                        <a href="" class="btn btn-default"><i class="fa fa-ban fa-fw"></i>Cancelar</a>
                                     </div>
-                                    <a href="{{action('ServiceController@cancel', ['id'=>$service->id])}}" class="btn btn-success" data-toggle="modal" data-target="#modal-finished">Finalizar</a>
-                                    <a href="" class="btn btn-default"><i class="fa fa-ban fa-fw"></i>Cancelar</a>
                                 </div>
                             </div>
-                        </div>
-
+</div>
                             <div class="col-md-12">
-                                <div id="service-print">
+                                <div class="print">
                                 <div class="panel panel-default" style="margin-top: 10px" >
                                     <div class="panel-body">
                                         <p><strong>Nome:</strong> {{$service->employee->name}}</p>
