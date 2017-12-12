@@ -1,19 +1,16 @@
 DELIMITER $$
-
 CREATE
   /*[DEFINER = { user | CURRENT_USER }]*/
 TRIGGER `app-exame`.`trg_history_delete` BEFORE DELETE
   ON `app-exame`.`services`
 FOR EACH ROW BEGIN
-  INSERT INTO services_history (`doctor_id`, `company_id`, `employee_id`, `description`, `created_at`)
-  VALUES (old.doctor_id, old.company_id, old.employee_id, old.observation, NOW());
+  INSERT INTO services_history (`employee_id`, `description`, `exam_date`, `created_at`)
+  VALUES (old.employee_id, old.observation, old.exam_date, NOW());
 END$$
-
 DELIMITER ;
 
 
 DELIMITER $$
-
 CREATE
   /*[DEFINER = { user | CURRENT_USER }]*/
 TRIGGER `app-exame`.`trg_validar_user_insert` BEFORE INSERT
@@ -24,11 +21,9 @@ FOR EACH ROW BEGIN
     SET new.name = NULL;
   END IF;
 END$$
-
 DELIMITER ;
 
 DELIMITER $$
-
 CREATE
   /*[DEFINER = { user | CURRENT_USER }]*/
 TRIGGER `app-exame`.`trg_validar_user_update` BEFORE UPDATE
@@ -39,21 +34,16 @@ FOR EACH ROW BEGIN
     SET new.name = NULL;
   END IF;
 END$$
-
 DELIMITER ;
 
 
 DELIMITER $$
-
 CREATE
 PROCEDURE `app-exame`.`services_delete`()
   BEGIN
-    SELECT employees.`name` AS employee, companies.`name` AS company, doctors.`name` doctor, services_history.`description`, services_history.`created_at`
+    SELECT employees.`name` AS employee, services_history.`description`, services_history.`exam_date`, services_history.`created_at`
     FROM services_history
-      INNER JOIN companies ON companies.`id`=`services_history`.`company_id`
       INNER JOIN employees ON employees.`id`=`services_history`.`employee_id`
-      INNER JOIN doctors ON `doctors`.`id`=services_history.`doctor_id`
       ORDER BY created_at DESC;
   END$$
-
 DELIMITER ;

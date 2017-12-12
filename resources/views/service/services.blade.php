@@ -21,7 +21,13 @@
                 <td>
                     {{$service->employee->name}}
                     @if($service->status == 1)
-                        <span class="label label-danger pull-right">Finalizado</span>
+                        <span class="label label-success pull-right">Finalizado</span>
+                    @elseif($service->status == 0 && $service->exam_date > date('Y-m-d'))
+                        <span class="label label-primary pull-right">Agendado</span>
+                    @elseif($service->status == 2)
+                        <span class="label label-default pull-right">Cancelado</span>
+                    @elseif($service->status == 0 && $service->exam_date < date('Y-m-d'))
+                        <span class="label label-danger pull-right">Não Finalizado</span>
                     @endif
                 </td>
                 <td>{{$service->company->name}}</td>

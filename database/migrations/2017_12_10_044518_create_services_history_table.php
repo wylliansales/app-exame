@@ -15,11 +15,11 @@ class CreateServicesHistoryTable extends Migration
     {
         Schema::create('services_history', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('doctor_id');
-            $table->integer('company_id');
-            $table->integer('employee_id');
-            $table->mediumText('description')->nullable();
-            $table->timestamps();
+            $table->integer('employee_id')->unsigned();
+            $table->foreign('employee_id')->references('id')->on('employees');
+            $table->string('description')->nullable();
+            $table->date('exam_date');
+            $table->dateTime('created_at');
         });
     }
 

@@ -1,3 +1,4 @@
+<br>
 @extends('layouts.app')
 @section('content')
     <div class="container">
@@ -16,9 +17,8 @@
                             <thead>
                             <tr>
                                 <th>Funcionário</th>
-                                <th>Empresa</th>
-                                <th>Médico</th>
                                 <th>Obs</th>
+                                <th>Data do Serviço</th>
                                 <th>Data da exclusão</th>
                             </tr>
                             </thead>
@@ -27,10 +27,9 @@
                                 @foreach($services as $service)
                                     <tr class="alert alert-danger">
                                         <td>{{$service->employee}}</td>
-                                        <td>{{$service->company}}</td>
-                                        <td>{{$service->doctor}}</td>
                                         <td>{{$service->description}}</td>
-                                        <td>{{$service->created_at}}</td>
+                                        <td>{{ Carbon\Carbon::parse($service->exam_date)->format('d/m/Y')}}</td>
+                                        <td>{{ Carbon\Carbon::parse($service->created_at)->format('d/m/Y')}}</td>
                                     </tr>
                                 @endforeach
                             @endif

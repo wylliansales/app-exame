@@ -35,9 +35,9 @@
                                                                 class="fa fa-pencil fa-fw"></i>&nbsp;Editar</a></li>
                                             </ul>
                                         </div>
-                                        <a href="{{action('ServiceController@cancel', ['id'=>$service->id])}}"
+                                        <a href=""
                                            class="btn btn-success" data-toggle="modal" data-target="#modal-finished">Finalizar</a>
-                                        <a href="" class="btn btn-default"><i class="fa fa-ban fa-fw"></i>Cancelar</a>
+                                        <a href="{{action('ServiceController@cancel', ['id'=>$service->id])}}" class="btn btn-default"><i class="fa fa-ban fa-fw"></i>Cancelar</a>
                                     </div>
                                 </div>
                             </div>
