@@ -35,7 +35,7 @@ class CompanyController extends Controller
 
     public function show(Request $request)
     {
-        $searchs = DB::table('companies')->where('name','like',$request->name . "%")->get();
+        $searchs = DB::table('companies')->where('name','like',"%". $request->name . "%")->get();
         $menu = 'company';
         return view('company.index', compact(['searchs','menu']));
     }
